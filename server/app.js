@@ -20,7 +20,7 @@ let lightsProcess;
 function runECU(scriptName) {
     console.log(`Starting ${scriptName}...`);
 
-    const process = spawn('python3.10', ['-u', `../backend/ecus/${scriptName}.py`]);
+    const process = spawn('python3.10', ['-u', `../backend/${scriptName}.py`]);
 
     process.stdout.on('data', (data) => {
         const parsedData = data.toString().trim();
