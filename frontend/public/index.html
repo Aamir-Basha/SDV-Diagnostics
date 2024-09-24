@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECU Dashboard</title>
+    <link rel="stylesheet" href="../src/styles.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="../src/script.js" defer></script>
+</head>
+<body>
+    <div id="engine" class="ecu-data">
+        <h2>Engine ECU</h2>
+        <p>RPM: <span id="rpm"></span></p>
+        <p>Temperature: <span id="temperature"></span><b> C°</b> </p>
+    </div>
+
+    <div id="lights" class="ecu-data">
+        <h2>Lights ECU</h2>
+        <p>Headlights: <span id="headlights"></span></p>
+        <p>Taillights: <span id="taillights"></span></p>
+        <button id="toggle-headlights-btn" onclick="toggleHeadlights()">Toggle Headlights</button>
+        <button id="toggle-taillights-btn" onclick="toggleTaillights()">Toggle Taillights</button>
+    </div>
+
+    <div id="diagnostics" class="ecu-data">
+        <h2>Diagnostics ECU</h2>
+        <p>Errors: <span id="errors"></span></p>
+    </div>
+</body>
+</html>
