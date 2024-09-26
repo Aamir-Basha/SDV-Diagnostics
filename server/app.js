@@ -20,9 +20,9 @@ let lightsProcess;
 function runECU(scriptName) {
     console.log(`Starting ${scriptName}...`);
 
-   const scriptPath = path.join(__dirname, '../backend/ecus', `${scriptName}.py`);
+   const scriptPath = path.join(__dirname, '../backend/', `${scriptName}.py`);
 
-    const process = spawn('python3.10', ['-u', scriptPath], { cwd: path.join(__dirname, '../backend/ecus') });
+    const process = spawn('python3.10', ['-u', scriptPath], { cwd: path.join(__dirname, '../backend/') });
 
     process.stdout.on('data', (data) => {
         const parsedData = data.toString().trim();
