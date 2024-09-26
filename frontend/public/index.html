@@ -11,8 +11,20 @@
 <body>
     <div id="engine" class="ecu-data">
         <h2>Engine ECU</h2>
-        <p>RPM: <span id="rpm"></span></p>
+        <p>Speed:       <span id="speed"></span> </p>
+        <p>Gear:    <span id="gear"></span> </p>
+        <p>RPM:         <span id="rpm"></span></p>
+        <p>Throttle:    <span id="throttle"></span> </p>
         <p>Temperature: <span id="temperature"></span><b> C°</b> </p>
+        <button id="clearDataButton">Clear Data</button>
+
+    </div>
+
+    <div id="throttle-control" class="ecu-data">
+        <h2>Throttle Control</h2>
+        <input type="range" id="throttleSlider" min="0" max="100" value="50" oninput="updateThrottle()" />
+        <p>Throttle: <span id="throttleValue">50</span>%</p>
+        <button id="applyThrottle" onclick="applyThrottle()">Apply Throttle</button>
     </div>
 
     <div id="lights" class="ecu-data">
