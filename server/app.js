@@ -14,13 +14,15 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/public', 'index.html'));
 });
 
-
+let currentThrottle = 0;
 let lightsProcess;
 
 function runECU(scriptName) {
     console.log(`Starting ${scriptName}...`);
 
-    const process = spawn('python3.10', ['-u', `../backend/${scriptName}.py`]);
+   const scriptPath = path.join(__dirname, '../backend/ecus', `${scriptName}.py`);
+
+    const process = spawn('python3.10', ['-u', scriptPath], { cwd: path.join(__dirname, '../backend/ecus') });
 
     process.stdout.on('data', (data) => {
         const parsedData = data.toString().trim();
@@ -53,18 +55,39 @@ const diagnosticsProcess = runECU('diagnostics');
 
 io.on('connection', (socket) => {
     console.log('Client connected');
+
+
+    engineProcess.stdin.write(`clear_the_data\n`);
+
+    socket.on('clear-the-data', () => {
+        console.log('Clearing engine data');
+
+        if (engineProcess && engineProcess.stdin) {
+            engineProcess.stdin.write('clear_the_data\n');
+        }
+    });
+
+
     lightsProcess.stdin.write('toggle_headlights\n');
+
+    socket.on('set-throttle', (data) => {
+        console.log(`Throttle set to: ${data.throttle}`);
+        currentThrottle = data.throttle;
+
+        if (engineProcess && engineProcess.stdin) {
+            engineProcess.stdin.write(`set_throttle ${currentThrottle}\n`);
+        }
+    });
 
     socket.on('toggle-headlights', () => {
         console.log('Toggle headlights command received');
-                if (lightsProcess) {
+        if (lightsProcess) {
             lightsProcess.stdin.write('toggle_headlights\n');
         }
     });
 
     socket.on('toggle-taillights', () => {
         console.log('Toggle taillights command received');
-
         if (lightsProcess) {
             lightsProcess.stdin.write('toggle_taillights\n');
         }
@@ -75,6 +98,3 @@ let port = 8888;
 server.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
-
-
-
