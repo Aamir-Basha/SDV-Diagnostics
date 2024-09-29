@@ -20,9 +20,9 @@ let lightsProcess;
 function runECU(scriptName) {
     console.log(`Starting ${scriptName}...`);
 
-   const scriptPath = path.join(__dirname, '../backend/', `${scriptName}.py`);
+   const scriptPath = path.join(__dirname, '../backend', `${scriptName}.py`);
 
-    const process = spawn('python3.10', ['-u', scriptPath], { cwd: path.join(__dirname, '../backend/') });
+    const process = spawn('python3', ['-u', scriptPath], { cwd: path.join(__dirname, '../backend') });
 
     process.stdout.on('data', (data) => {
         const parsedData = data.toString().trim();
@@ -59,6 +59,20 @@ io.on('connection', (socket) => {
 
     engineProcess.stdin.write(`clear_the_data\n`);
 
+    socket.on('apply-brake', () => {
+        console.log('Brake applied');
+        if (engineProcess && engineProcess.stdin) {
+            engineProcess.stdin.write('apply_brake\n');
+        }
+    });
+
+    socket.on('chargeBattery', () => {
+        console.log('Starting to Charge the Battery');
+        if (engineProcess && engineProcess.stdin) {
+            engineProcess.stdin.write('chargeBattery\n');
+        }
+    });
+
     socket.on('clear-the-data', () => {
         console.log('Clearing engine data');
 
@@ -92,9 +106,27 @@ io.on('connection', (socket) => {
             lightsProcess.stdin.write('toggle_taillights\n');
         }
     });
+
+
+
 });
+
+
+
 
 let port = 8888;
 server.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+
+
+
+
+
+
+
+
+
+
+
+

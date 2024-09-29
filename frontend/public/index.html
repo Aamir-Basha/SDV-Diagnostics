@@ -11,13 +11,16 @@
 <body>
     <div id="engine" class="ecu-data">
         <h2>Engine ECU</h2>
-        <p>Speed:       <span id="speed"></span> </p>
-        <p>Gear:    <span id="gear"></span> </p>
-        <p>RPM:         <span id="rpm"></span></p>
-        <p>Throttle:    <span id="throttle"></span> </p>
-        <p>Temperature: <span id="temperature"></span><b> C°</b> </p>
+        <p>Speed: <span id="speed"></span> </p>
+        <p>Gear: <span id="gear"></span> </p>
+        <p>RPM: <span id="rpm"></span></p>
+        <p>Throttle: <span id="throttle"></span> </p>
+        <p>Temperature:<span id="temperature"></span><b> C°</b> </p>
+        <p>Battery Level: <span id="battery-value-1"></span></p>
+        <p>Braking Status: <span id="braking-status"></span></p>
         <button id="clearDataButton">Clear Data</button>
-
+        <button id="chargeBattery" onclick="chargeBattery()">Start Charging</button>
+        <p>Charging Status: <span id="is_charging">Not Charging</span></p>
     </div>
 
     <div id="throttle-control" class="ecu-data">
@@ -25,6 +28,7 @@
         <input type="range" id="throttleSlider" min="0" max="100" value="50" oninput="updateThrottle()" />
         <p>Throttle: <span id="throttleValue">50</span>%</p>
         <button id="applyThrottle" onclick="applyThrottle()">Apply Throttle</button>
+        <button id="applyBrake" onclick="applyBrake()">Apply Brake</button> 
     </div>
 
     <div id="lights" class="ecu-data">
@@ -38,6 +42,11 @@
     <div id="diagnostics" class="ecu-data">
         <h2>Diagnostics ECU</h2>
         <p>Errors: <span id="errors"></span></p>
+        <h2>Diagnostics History</h2>
+        <p>Errors: <span id="error-history"></span></p>
     </div>
+    
+
+
 </body>
 </html>
