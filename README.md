@@ -15,6 +15,8 @@ The project integrates Python for backend vehicle logic and diagnostics and Node
 - **Smooth Needle Animation**: A smooth, real-time needle animation for the speed gauge that reacts dynamically based on engine speed data.
 - **Braking and Charging Simulation**: Simulates vehicle braking and charging behavior.
 
+![SDV Dashboard]( frontend/src/dashboard.png)
+
 ## Technical Stack
 
 - **Backend**: Python for handling engine logic and generating diagnostic data.
@@ -54,9 +56,6 @@ To set up the project locally, follow these steps:
    ```bash
    http://localhost:8888
    ```
-
-![SDV Dashboard]( frontend/src/dashboard.png)
-
 
 ## Key Components
 
