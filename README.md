@@ -55,6 +55,7 @@ To set up the project locally, follow these steps:
    http://localhost:8888
    ```
 
+![SDV Dashboard](dashboard.png)
 
 ## Key Components
 
