@@ -1,11 +1,13 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: lightsteelblue;
     margin: 0;
     padding: 20px;
+    display: flex;
+    justify-content: center;
 }
 h2 {
-    color: #333;
+    color: black;
 }
 .ecu-data {
     background-color: #fff;
@@ -13,6 +15,10 @@ h2 {
     border-radius: 5px;
     padding: 20px;
     margin-bottom: 20px;
+    margin-left: 20px;
+    width: calc(30% - 20px);
+    max-width: 400px;
+
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 button {
@@ -25,9 +31,110 @@ button {
     margin-top: 10px;
 }
 button:hover {
+    padding: 10px;
     background-color: #0056b3;
+    transform: scale(1.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+
+.speed {
+    position: absolute;
+    display: flex;
+    left: 40%;
+    top: 60%;
+    transform: translate(-50%, -50%);
 }
+
+.speed__wheel {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-color: #000;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 0% 90%);
+}
+.speed.high-speed {
+            background-color: red; 
+        }
+
+.speed__tick {
+    display: flex;
+    gap: 1px;
+}
+
+.tick {
+    transform-origin: bottom;
+    position: absolute;
+    background: linear-gradient(to top, transparent 90%, red 90%);
+    height: 140px;
+    width: 2px;
+    top: 10px;
+    left: 50%;
+    transform: rotate(var(--angle)) rotateZ(-127deg);
+}
+
+.tick:nth-child(odd)::before {
+    position: absolute;
+    content: attr(value) '';
+    color: white;
+    left: -8px;
+    top: 20px;
+    z-index: 11;
+    transform: rotate(var(--position-number));
+}
+
+/* This is a manual CSS version of the SCSS loop */
+.tick:nth-child(1) { --angle: 0deg; --position-number: 130deg; }
+.tick:nth-child(2) { --angle: 13.33deg; --position-number: 116.5deg; }
+.tick:nth-child(3) { --angle: 26.67deg; --position-number: 103deg; }
+.tick:nth-child(4) { --angle: 40deg; --position-number: 89.5deg; }
+.tick:nth-child(5) { --angle: 53.33deg; --position-number: 76deg; }
+.tick:nth-child(6) { --angle: 66.67deg; --position-number: 62.5deg; }
+.tick:nth-child(7) { --angle: 80deg; --position-number: 49deg; }
+.tick:nth-child(8) { --angle: 93.33deg; --position-number: 35.5deg; }
+.tick:nth-child(9) { --angle: 106.67deg; --position-number: 22deg; }
+.tick:nth-child(10) { --angle: 120deg; --position-number: 8.5deg; }
+.tick:nth-child(11) { --angle: 133.33deg; --position-number: -5deg; }
+.tick:nth-child(12) { --angle: 146.67deg; --position-number: -18.5deg; }
+.tick:nth-child(13) { --angle: 160deg; --position-number: -32deg; }
+.tick:nth-child(14) { --angle: 173.33deg; --position-number: -45.5deg; }
+.tick:nth-child(15) { --angle: 186.67deg; --position-number: -59deg; }
+.tick:nth-child(16) { --angle: 200deg; --position-number: -72.5deg; }
+.tick:nth-child(17) { --angle: 213.33deg; --position-number: -86deg; }
+.tick:nth-child(18) { --angle: 226.67deg; --position-number: -99.5deg; }
+.tick:nth-child(19) { --angle: 240deg; --position-number: -113deg; }
+.tick:nth-child(20) { --angle: 253.33deg; --position-number: -126.5deg; }
+.tick:nth-child(21) { --angle: 266.33deg; --position-number: -140deg; }
+
+
+.pointer {
+    position: relative;
+    background: blue;
+    height: 190px;
+    width: 20px;
+    left: 140px;
+    top: 10px;
+    clip-path: polygon(9px 10px, 11px 10px, 20px 150px, 10px 190px, 0 150px);
+    transform-origin: 10px 145px;
+    animation: animate-pointer 5s ease-in-out infinite;
+}
+
+.pointer::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: gray;
+    top: 140px;
+    left: 5px;
+    border-radius: 50%;
+}
+
+
+
+
+#speedPointer {
+    transition: transform 2s ease;
+}
+
+

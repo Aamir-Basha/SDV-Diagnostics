@@ -8,6 +8,24 @@ socket.on('lights-status', (data) => {
 
 
 
+let currentAngle = -125; //Starting angle
+
+function updateNeedle(targetSpeed) {
+    const maxSpeed = 180; 
+    const angleRange = 240;
+    const startAngle = -125;
+    const targetAngle = (targetSpeed / maxSpeed) * angleRange + startAngle;
+
+    
+    const step = (targetAngle - currentAngle) * 0.2;
+    currentAngle += step;
+    document.getElementById('speedPointer').style.transform = `rotate(${currentAngle}deg)`;
+    if (Math.abs(targetAngle - currentAngle) > 1) {
+        requestAnimationFrame(() => updateNeedle(targetSpeed));
+    }
+
+}
+
 function toggleHeadlights() {
     socket.emit('toggle-headlights');
 }
@@ -42,6 +60,9 @@ socket.on('engine-status', (data) => {
 
         if (document.getElementById('speed')) {
             document.getElementById('speed').innerText = status.speed;
+            
+
+            updateNeedle(status.speed);
         }
 
         if (document.getElementById('gear')) {

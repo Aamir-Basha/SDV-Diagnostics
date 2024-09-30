@@ -6,6 +6,7 @@
     <title>ECU Dashboard</title>
     <link rel="stylesheet" href="../src/styles.css">
     <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gauge.js@1.3.7/dist/gauge.min.js"></script>
     <script src="../src/script.js" defer></script>
 </head>
 <body>
@@ -45,7 +46,38 @@
         <h2>Diagnostics History</h2>
         <p>Errors: <span id="error-history"></span></p>
     </div>
+
     
+
+<div class='speed'>
+      <div class='speed__wheel'>
+        <div class='speed__tick'>
+          <div class='tick' value='0'></div>
+          <div class='tick' value='10'></div>
+          <div class='tick' value='20'></div>
+          <div class='tick' value='30'></div>
+          <div class='tick' value='40'></div>
+          <div class='tick' value='50'></div>
+          <div class='tick' value='60'></div>
+          <div class='tick' value='70'></div>
+          <div class='tick' value='80'></div>
+          <div class='tick' value='90'></div>
+          <div class='tick' value='100'></div>
+          <div class='tick' value='110'></div>
+          <div class='tick' value='120'></div>
+          <div class='tick' value='130'></div>
+          <div class='tick' value='140'></div>
+          <div class='tick' value='150'></div>
+          <div class='tick' value='160'></div>
+          <div class='tick' value='170'></div>
+          <div class='tick' value='180'></div>
+          <div class='tick' value='190'></div>
+          <div class='tick' value='200'></div>
+
+        </div>
+        <div class='pointer' id="speedPointer"></div>
+      </div>
+    </div>
 
 
 </body>
